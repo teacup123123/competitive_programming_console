@@ -1,2 +1,2 @@
 # competitive_programming_console
-a console toolkit that crawls problems using Selenium. Supports Codeforces, ATcoder, Google Code Jam 
+a windows console toolkit that crawls problems using Selenium/automatically submits solutions. Supports Codeforces, ATcoder, Google Code Jam 
