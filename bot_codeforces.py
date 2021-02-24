@@ -109,7 +109,7 @@ class bot_codeforces(bot_cp):
             problink.send_keys(Keys.CONTROL + Keys.ENTER)
 
         for c in prob_codes:
-            self.prept(c, autoload=True)
+            self.prept(c, autoload=problems[0] == c)
 
         while driver.current_url != fr'https://codeforces.com/contest/{contestname}/submit':
             driver.get(fr'https://codeforces.com/contest/{contestname}/submit')
