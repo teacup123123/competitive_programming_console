@@ -1,21 +1,21 @@
 import pyautogui as pg
 import pyperclip as pc
 import time
-from local_testing_tool import IO
-
-io = IO()
-
-
-def res(type=int):
-    return map(type, io.ReadInput())
-
-
-def re(type=int):
-    return int(io.ReadInput())
-
-
-def print(x):
-    io.PrintOutput(f'{x}')
+# from local_testing_tool import IO
+#
+# io = IO()
+#
+#
+# def res(type=int):
+#     return map(type, io.ReadInput())
+#
+#
+# def re(type=int):
+#     return int(io.ReadInput())
+#
+#
+# def print(x):
+#     io.PrintOutput(f'{x}')
 
 
 def attachnow(target):
