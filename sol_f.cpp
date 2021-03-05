@@ -1,4 +1,4 @@
-//sol_f.cpp abc191
+//sol_f.cpp abc193
 //a b c d e f
 #include <bits/stdc++.h>
 
@@ -379,18 +379,25 @@ int main(int argc, char *argv[]) {
         };//</python-generator-in>
         string testinputs[] = {//<python-autofill-in>
 
+R"(2
+BB
+BW)",
 R"(3
-6 9 12)",
-R"(4
-8 2 12 6)",
-R"(7
-30 28 33 49 27 37 48)",
+BBB
+BBB
+W?W)",
+R"(5
+?????
+?????
+?????
+?????
+?????)",
         };//</python-autofill-in>
         string testoutputs[] = {//<python-autofill-out>
 
 R"(2)",
-R"(1)",
-R"(7)",
+R"(4)",
+R"(40)",
         };//</python-autofill-out>
 
         cout << "--- generator testing ---" << endl;

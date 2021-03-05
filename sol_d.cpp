@@ -1,4 +1,4 @@
-//sol_d.cpp abc191
+//sol_d.cpp abc193
 //a b c d e f
 #include <bits/stdc++.h>
 
@@ -346,6 +346,40 @@ void precalc() {
 
 void solve(int ti) {//note ti is 1-indexed
     //<python-autofill-src>
+    int k;
+    re(k);
+    vl left(10, k);
+    string t, a;
+    re(t, a);
+    for (auto player:{t, a}) {
+        trav(c, player) {
+            if (c == '#')continue;
+            int used = c - '0';
+            left[used]--;
+        }
+    }
+    def(score, int, (string s)) {
+        vi count(10);
+        int ans = 0;
+        trav(c, s) {
+            count[c - '0']++;
+        }
+        f0r(c, 10)ans += (c) * dpow(10, count[c]);
+        return ans;
+    };
+    ll wins = 0, tot = 0;
+    for (int tl = 1; tl < 10; tl++)
+        for (int al = 1; al < 10; al++) {
+            ll pt = left[tl];
+            ll pa = max(0LL, left[al] - (tl == al));
+            if (pt * pa == 0)continue;
+            t[4] = '0' + tl;
+            a[4] = '0' + al;
+            if (score(t) > score(a))wins += pt * pa;
+            tot += pt * pa;
+        }
+
+    ps(1.*wins/tot);
     //</python-autofill-src>
 }
 
@@ -379,15 +413,25 @@ int main(int argc, char *argv[]) {
         };//</python-generator-in>
         string testinputs[] = {//<python-autofill-in>
 
-R"(0.2 0.8 1.1)",
-R"(100 100 1)",
-R"(42782.4720 31949.0192 99999.99)",
+                R"(2
+1144#
+2233#)",
+                R"(2
+9988#
+1122#)",
+                R"(6
+1122#
+2228#)",
+                R"(100000
+3226#
+3597#)",
         };//</python-autofill-in>
         string testoutputs[] = {//<python-autofill-out>
 
-R"(3)",
-R"(5)",
-R"(31415920098)",
+                R"(0.4444444444444444)",
+                R"(1.0)",
+                R"(0.001932367149758454)",
+                R"(0.6296297942426154)",
         };//</python-autofill-out>
 
         cout << "--- generator testing ---" << endl;

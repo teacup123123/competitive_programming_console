@@ -1,4 +1,4 @@
-//sol_c.cpp abc191
+//sol_c.cpp abc193
 //a b c d e f
 #include <bits/stdc++.h>
 
@@ -346,6 +346,18 @@ void precalc() {
 
 void solve(int ti) {//note ti is 1-indexed
     //<python-autofill-src>
+    ll n;
+    re(n);
+    ll ans = 0;
+    set<ll> can;
+    for (ll pow = 2; true; pow++) {
+        ll added = 0;
+        for (ll base = 2; (added=dpow(base, pow)) <= n; base++)
+            can.emplace(added);
+        if (dpow(2LL, pow) > n)
+            break;
+    }
+    ps(n - sz(can));
     //</python-autofill-src>
 }
 
@@ -379,16 +391,13 @@ int main(int argc, char *argv[]) {
         };//</python-generator-in>
         string testinputs[] = {//<python-autofill-in>
 
-R"(5 5
-.....
-.###.
-.###.
-.###.
-.....)",
+                R"(8)",
+                R"(100000)",
         };//</python-autofill-in>
         string testoutputs[] = {//<python-autofill-out>
 
-R"(4)",
+                R"(6)",
+                R"(99634)",
         };//</python-autofill-out>
 
         cout << "--- generator testing ---" << endl;

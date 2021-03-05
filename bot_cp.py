@@ -71,7 +71,7 @@ class bot_cp:
         files = os.listdir('.')
         avoid = [reference]
         for f in files:
-            if f not in avoid and f.endswith('.cpp'):
+            if f not in avoid and f.endswith('.cpp') and f.startswith('sol'):
                 os.remove(f)
         with open(reference, 'r') as f0:
             with open(solving, 'w') as f:
@@ -106,7 +106,7 @@ class bot_cp:
         got_, prob_code_, contestname_, prob_codes_ = self.digest()
 
         if prob_code_.lower() != prob_code.lower() and contestname_ != '_':  # setting _ disactivates backing up
-            backupinto = solution_format.format(self.prob_code)
+            backupinto = solution_format.format(prob_code_.lower())
             print(f'backing up {solving} into {backupinto}')
 
             # snapshots input_injection.py into the source code
@@ -118,7 +118,6 @@ class bot_cp:
                     got_.insert(fr, l)
             with open(backupinto, 'w') as f:
                 f.writelines(got_)
-
 
         self.prob_code = prob_code
         with open(solution_format.format(prob_code.lower()), 'r') as f:

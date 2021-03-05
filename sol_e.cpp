@@ -1,4 +1,4 @@
-//sol_e.cpp abc191
+//sol_e.cpp abc193
 //a b c d e f
 #include <bits/stdc++.h>
 
@@ -346,13 +346,59 @@ void precalc() {
 
 void solve(int ti) {//note ti is 1-indexed
     //<python-autofill-src>
+    ll x, y, p, q;
+    re(x, y, p, q);
+    ll a = 2 * x + 2 * y;//[x x+y[ = [x x+y-1]
+    ll b = p + q;//[p p+q[ = [p,p+q-1]
+    ll g = gcd(a, b);
+    ll earliest = LLONG_MAX;
+    // p in [x, x+y-1] mod a
+    ll ag = a / g;
+    ll bg = b / g;
+    if (ag == 1) {
+        for (int m = p; m <= p + q - 1; m++) {
+            if (m % a >= x and m % a <= x + y - 1) {
+                ps(m);
+                return;
+            }
+        }
+    }
+    if (bg == 1) {
+        for (int m = x; m <= x + y - 1; m++) {
+            if (m % b >= p and m % b <= p + q - 1) {
+                ps(m);
+                return;
+            }
+        }
+    }
+    for (ll moda = x; moda <= x + y - 1; moda++) {
+        if (moda % g != p % g)continue;
+        //bZ + p = moda mod a
+        ll targ = ((a + moda - p % a) % a) / g;
+        ll z = modop(ag + inv(bg, ag) % ag, ag) * targ;
+        z = z % ag;
+        ckmin(earliest, z * b + p);
+    }
+    // x in [p p+q-1] mod b
+    if (bg != 1)
+        for (ll modb = p; modb <= p + q - 1; modb++) {
+            if (modb % g != x % g)continue;
+            //aZ + x = modb mod b
+            ll targ = ((b + modb - x % b) % b) / g;
+            ll z = modop(bg + inv(ag, bg) % bg, bg) * targ;
+            z = z % bg;
+            ckmin(earliest, z * a + x);
+        }
+    ps(earliest != LLONG_MAX ? to_string(earliest) : "infinity");
+
+
     //</python-autofill-src>
 }
 
 void load_cases() {
     int T = 1;
     {
-//        re(T);//<test case>
+        re(T);//<test case>
     }
     vfor(i, 1, T + 1) {
 //        pr("Case #",i,": ");//Google Code jam outputs
@@ -379,41 +425,23 @@ int main(int argc, char *argv[]) {
         };//</python-generator-in>
         string testinputs[] = {//<python-autofill-in>
 
-R"(4 4
-1 2 5
-2 3 10
-3 1 15
-4 3 20)",
-R"(4 6
-1 2 5
-1 3 10
-2 4 5
-3 4 10
-4 1 10
-1 1 10)",
-R"(4 7
-1 2 10
-2 3 30
-1 4 15
-3 4 25
-3 4 20
-4 3 20
-4 3 30)",
+                R"(10
+2 1 1 2
+1 1 1 1
+1 2 1 1
+2 1 2 1
+2 1 1 2
+1 4 4 1
+2 1 1 2
+5 2 7 6
+1 1 3 1
+999999999 1 1000000000 1)",
         };//</python-autofill-in>
         string testoutputs[] = {//<python-autofill-out>
 
-R"(30
-30
-30
--1)",
-R"(10
-20
-30
-20)",
-R"(-1
--1
-40
-40)",
+                R"(20
+infinity
+1000000000999999999)",
         };//</python-autofill-out>
 
         cout << "--- generator testing ---" << endl;

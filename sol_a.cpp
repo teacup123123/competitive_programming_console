@@ -1,4 +1,4 @@
-//sol_a.cpp abc191
+//sol_a.cpp abc193
 //a b c d e f
 #include <bits/stdc++.h>
 
@@ -346,6 +346,10 @@ void precalc() {
 
 void solve(int ti) {//note ti is 1-indexed
     //<python-autofill-src>
+    int x, y;
+    re(x,y);
+    float ans = (100. * (x - y) / x);
+    ps(ans);
     //</python-autofill-src>
 }
 
@@ -379,13 +383,15 @@ int main(int argc, char *argv[]) {
         };//</python-generator-in>
         string testinputs[] = {//<python-autofill-in>
 
-R"(10 3 5 20)",
-R"(10 3 5 30)",
+                R"(100 80)",
+                R"(7 6)",
+                R"(99999 99998)",
         };//</python-autofill-in>
         string testoutputs[] = {//<python-autofill-out>
 
-R"(Yes)",
-R"(No)",
+                R"(20.0)",
+                R"(14.285714285714285714)",
+                R"(0.00100001000010000100)",
         };//</python-autofill-out>
 
         cout << "--- generator testing ---" << endl;
