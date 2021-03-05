@@ -334,7 +334,6 @@ inline pair<T, T> operator-(const pair<T, T> a, const pair<T, T> b) {
  */
 
 //<manual-imports-src>
-#include "libs/atmaxflow.h"
 //</manual-imports-src>
 
 //<python-autoimport-src>
@@ -347,35 +346,6 @@ void precalc() {
 
 void solve(int ti) {//note ti is 1-indexed
     //<python-autofill-src>
-    int N;
-    cin >> N;
-    vector<string> c(N);
-    for (string &s : c) cin >> s;
-    for (int i = 0; i < N; i++)
-        for (int j = 0; j < N; j++) {
-            if ((i ^ j) & 1 && c[i][j] != '?') c[i][j] ^= 'B' ^ 'W';
-        }
-    const int S = N * N, T = S + 1;
-    atcoder::mf_graph<int> g(S + 2);
-    for (int i = 0; i < N; i++)
-        for (int j = 0; j < N - 1; j++) {
-            const int x = i * N + j;
-            g.change_edge(g.add_edge(x, x + 1, 2), 2, 1);
-        }
-    for (int i = 0; i < N - 1; i++)
-        for (int j = 0; j < N; j++) {
-            const int x = i * N + j;
-            g.change_edge(g.add_edge(x, x + N, 2), 2, 1);
-        }
-    for (int i = 0; i < N; i++)
-        for (int j = 0; j < N; j++) {
-            const int x = i * N + j;
-            if (c[i][j] == 'B')
-                g.add_edge(S, x, 4);
-            if (c[i][j] == 'W')
-                g.add_edge(x, T, 4);
-        }
-    cout << 2 * N * (N - 1) - g.flow(S, T) << "" << endl;
     //</python-autofill-src>
 }
 

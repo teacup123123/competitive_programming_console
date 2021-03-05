@@ -60,6 +60,19 @@ def inject(dst, template, ins, outs, infr, outfr):
         f.write(''.join(template))
 
 
+def atcoder_dfs(filename, got, inject_into, treated: set):
+    if filename in treated:
+        return
+    treated.add(filename)
+    with open(f'atcoder/{filename}', 'r') as f:
+        for readline in reversed(f.readlines()):
+            match = re.match('#include "atcoder/([\w_.]+)"', readline)
+            if match:
+                atcoder_dfs(match.group(1), got, inject_into, treated)
+            else:
+                got.insert(inject_into, readline)
+
+
 class bot_cp:
     def __init__(self):
         self.contestname = '_'
@@ -163,13 +176,24 @@ class bot_cp:
             inject_into = inject_from + 1
             for li in range(scanfrom + 1, scanto):
                 line = got[li]
-                print(f'\t{line[:-1] if not line.startswith("//") else line[2:-1]}')
-                filename, *_ = re.match('[/]*#include "libs/(\S+)\.h"', line).groups()
-                if not line.startswith('//'):
-                    got[li] = '//' + line
-                with open(f'libs/{filename}.h', 'r') as f:
-                    for readline in reversed(f.readlines()):
-                        got.insert(inject_into, readline)
+                matched = re.match('[/]*#include "libs/(\S+)\.h"', line)
+                if matched:
+                    print(f'\t{line[:-1] if not line.startswith("//") else line[2:-1]}')
+                    filename, *_ = matched.groups()
+                    if not line.startswith('//'):
+                        got[li] = '//' + line
+                    with open(f'libs/{filename}.h', 'r') as f:
+                        for readline in reversed(f.readlines()):
+                            got.insert(inject_into, readline)
+                else:
+                    matched = re.match('[/]*#include "atcoder/([\S.]+)"', line)
+                    if matched:
+                        print(f'\t{line[:-1] if not line.startswith("//") else line[2:-1]}')
+                        filename, *_ = matched.groups()
+                        if not line.startswith('//'):
+                            got[li] = '//' + line
+
+                        atcoder_dfs(filename, got, inject_into, set())
         with open(solving, 'w') as f:
             f.writelines(got)
 
