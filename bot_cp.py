@@ -194,8 +194,9 @@ class bot_cp:
                             got[li] = '//' + line
 
                         atcoder_dfs(filename, got, inject_into, set())
-        with open(solving, 'w') as f:
-            f.writelines(got)
+        pyperclip.copy(''.join(got))
+        # with open(solving, 'w') as f:
+        #     f.writelines(got)
 
     def cp(self):
         '''copies code to clipboard'''

@@ -55,13 +55,18 @@ class bot_codeforces(bot_cp):
         while driver.current_url != fr'https://codeforces.com/contest/{self.contestname}/submit':
             driver.get(fr'https://codeforces.com/contest/{self.contestname}/submit')
         selection = driver.find_element_by_name('submittedProblemIndex')
-        # toggle_editor = driver.find_element_by_class_name('toggleEditorCheckboxLabel') # only for codeforce, multi-character
         selection.send_keys(task_code)
-        # editor = driver.find_element_by_tag_name('textarea')
+        toggle_editor = driver.find_element_by_class_name('toggleEditorCheckboxLabel') # only for codeforce, multi-character
+        editor = driver.find_element_by_id('sourceCodeTextarea')
         srcfilebrowse_button = driver.find_element_by_name('sourceFile')
-        src_file_loc = os.path.abspath(pth.join(os.getcwd(), solving))
-        print(f"uploading file {src_file_loc}")
-        srcfilebrowse_button.send_keys(src_file_loc)
+        while 'inline-block' not in editor.get_attribute('style'):
+            toggle_editor.click()
+        # src_file_loc = os.path.abspath(pth.join(os.getcwd(), solving))
+        self.incl()
+        editor.send_keys(Keys.CONTROL + 'v')
+
+        # print(f"uploading file {src_file_loc}")
+        # srcfilebrowse_button.send_keys(src_file_loc)
         submit = driver.find_element_by_class_name('submit')
         while submit.get_attribute('disabled') == 'disabled':
             print('submit button disabled')
