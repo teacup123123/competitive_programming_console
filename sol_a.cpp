@@ -1,5 +1,5 @@
-//sol_a.cpp abc193
-//a b c d e f
+//sol_a.cpp 000000000043580a
+//a b c d e
 #include <bits/stdc++.h>
 
 using namespace std;
@@ -48,7 +48,6 @@ typedef map<int, int> mii;
 #define trav(a, x) for (auto& a: x)
 #define def(fname, rtype, args, ...) function<rtype args> fname = [__VA_ARGS__] args
 
-#define boost() cin.tie(0),cin.sync_with_stdio(0)
 
 template<class T>
 void binstf(T &found, T a, T b, function<bool(T)> test, bool TF = true) {
@@ -344,23 +343,39 @@ inline pair<T, T> operator-(const pair<T, T> a, const pair<T, T> b) {
 void precalc() {
 }
 
-void solve(int ti) {//note ti is 1-indexed
+
+//#define INTERACTIVE 1//interactive
+
+#ifdef INTERACTIVE
+#define RTYPE bool
+#else
+#define RTYPE void
+#endif
+
+RTYPE solve(int ti) {
+    //----------------------------------------------------------------
     //<python-autofill-src>
-    int x, y;
-    re(x,y);
-    float ans = (100. * (x - y) / x);
-    ps(ans);
     //</python-autofill-src>
+    //----------------------------------------------------------------
+#ifdef INTERACTIVE
+    int verdict;
+    re(verdict);
+    return verdict == -1;
+#endif
 }
 
 void load_cases() {
     int T = 1;
     {
-//        re(T);//<test case>
+        re(T);//<test case>
     }
     vfor(i, 1, T + 1) {
-//        pr("Case #",i,": ");//Google Code jam outputs
+#ifdef INTERACTIVE
+        if (solve(i))break;
+#else
+        pr("Case #", i, ": ");//Google Code jam outputs
         solve(i);
+#endif//INTERACTIVE
     }
     bool finished;
     finished = true;
@@ -376,22 +391,30 @@ int main(int argc, char *argv[]) {
     precalc();//
 
     if (online) {
-        boost();
+#ifndef INTERACTIVE
+        cin.tie(0), cin.sync_with_stdio(0);
+#endif  // INTERACTIVE
         load_cases();
     } else {//offline
         string generator_inputs[] = {//<python-generator-in>
         };//</python-generator-in>
         string testinputs[] = {//<python-autofill-in>
+R"(3
+4
+4 2 1 3
+2
+1 2
+7
+7 6 5 4 3 2 1
 
-                R"(100 80)",
-                R"(7 6)",
-                R"(99999 99998)",
+)",
         };//</python-autofill-in>
         string testoutputs[] = {//<python-autofill-out>
+R"(Case #1: 6
+Case #2: 1
+Case #3: 12
 
-                R"(20.0)",
-                R"(14.285714285714285714)",
-                R"(0.00100001000010000100)",
+)",
         };//</python-autofill-out>
 
         cout << "--- generator testing ---" << endl;

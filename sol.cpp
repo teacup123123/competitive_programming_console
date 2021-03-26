@@ -350,16 +350,18 @@ void precalc() {
 #define RTYPE bool
 #else
 #define RTYPE void
-#endif  //INTERACTIVE
+#endif
 
 RTYPE solve(int ti) {
+    //----------------------------------------------------------------
     //<python-autofill-src>
     //</python-autofill-src>
+    //----------------------------------------------------------------
 #ifdef INTERACTIVE
     int verdict;
     re(verdict);
     return verdict == -1;
-#endif  // INTERACTIVE
+#endif
 }
 
 void load_cases() {
@@ -369,11 +371,11 @@ void load_cases() {
     }
     vfor(i, 1, T + 1) {
 #ifdef INTERACTIVE
-        pr("Case #", i, ": ");//Google Code jam outputs
-        if (solve(i))break;//interactive
+        if (solve(i))break;
 #else
-        solve(i);//interactive
-#endif  // INTERACTIVE
+        pr("Case #", i, ": ");//Google Code jam outputs
+        solve(i);
+#endif//INTERACTIVE
     }
     bool finished;
     finished = true;
