@@ -48,7 +48,6 @@ typedef map<int, int> mii;
 #define trav(a, x) for (auto& a: x)
 #define def(fname, rtype, args, ...) function<rtype args> fname = [__VA_ARGS__] args
 
-#define boost() cin.tie(0),cin.sync_with_stdio(0)
 
 template<class T>
 void binstf(T &found, T a, T b, function<bool(T)> test, bool TF = true) {
@@ -369,8 +368,8 @@ void load_cases() {
         re(T);//<test case>
     }
     vfor(i, 1, T + 1) {
-        pr("Case #", i, ": ");//Google Code jam outputs
 #ifdef INTERACTIVE
+//        pr("Case #", i, ": ");//Google Code jam outputs
         if (solve(i))break;//interactive
 #else
         solve(i);//interactive
@@ -390,7 +389,9 @@ int main(int argc, char *argv[]) {
     precalc();//
 
     if (online) {
-        boost();
+#ifndef INTERACTIVE
+        cin.tie(0), cin.sync_with_stdio(0);
+#endif  // INTERACTIVE
         load_cases();
     } else {//offline
         string generator_inputs[] = {//<python-generator-in>
