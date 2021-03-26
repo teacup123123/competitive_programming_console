@@ -1,1 +1,1 @@
-python startcj.py
+python bot_codejam.py

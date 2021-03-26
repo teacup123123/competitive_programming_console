@@ -22,10 +22,10 @@ def attachnow(target):
     pg.hotkey('ctrl', 'alt', 'f5')  # auto invoques the attach to dialogue on PH
     pg.hotkey('ctrl', 'alt', 'w')  # auto invoques the attach to dialogue on asus
     time.sleep(1)
-    pg.write('cf-built')
+    pg.write('solution')
     time.sleep(0.2)
     pg.press('enter')
     time.sleep(1)
-    with open('cf.cpp', 'r') as f:
+    with open('sol.cpp', 'r') as f:
         pc.copy(f.read(-1))
     target()  # please choose pg

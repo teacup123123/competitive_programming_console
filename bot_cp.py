@@ -35,10 +35,13 @@ def get_driver():
             try:
                 opt.add_argument(rf"user-data-dir={addr}")
                 _driver = webdriver.Chrome(options=opt)
-            except Exception:
+            except Exception as e:
                 continue
             break
-        _driver.get('chrome://discards/')
+        try:
+            _driver.get('chrome://discards/')
+        except Exception:
+            raise e
         while '✘️' not in _driver.find_element_by_tag_name('body').text:
             time.sleep(0.5)
             pass

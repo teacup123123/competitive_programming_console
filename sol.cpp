@@ -1,5 +1,5 @@
-//sol_f.cpp abc193
-//a b c d e f
+//sol_a.cpp 000000000043580a
+//a b c d e
 #include <bits/stdc++.h>
 
 using namespace std;
@@ -344,19 +344,37 @@ inline pair<T, T> operator-(const pair<T, T> a, const pair<T, T> b) {
 void precalc() {
 }
 
-void solve(int ti) {//note ti is 1-indexed
+
+//#define INTERACTIVE 1//interactive
+
+#ifdef INTERACTIVE
+#define RTYPE bool
+#else
+#define RTYPE void
+#endif  //INTERACTIVE
+
+RTYPE solve(int ti) {
     //<python-autofill-src>
     //</python-autofill-src>
+#ifdef INTERACTIVE
+    int verdict;
+    re(verdict);
+    return verdict == -1;
+#endif  // INTERACTIVE
 }
 
 void load_cases() {
     int T = 1;
     {
-//        re(T);//<test case>
+        re(T);//<test case>
     }
     vfor(i, 1, T + 1) {
-//        pr("Case #",i,": ");//Google Code jam outputs
-        solve(i);
+        pr("Case #", i, ": ");//Google Code jam outputs
+#ifdef INTERACTIVE
+        if (solve(i))break;//interactive
+#else
+        solve(i);//interactive
+#endif  // INTERACTIVE
     }
     bool finished;
     finished = true;
@@ -378,26 +396,22 @@ int main(int argc, char *argv[]) {
         string generator_inputs[] = {//<python-generator-in>
         };//</python-generator-in>
         string testinputs[] = {//<python-autofill-in>
-
-                R"(2
-BB
-BW)",
                 R"(3
-BBB
-BBB
-W?W)",
-                R"(5
-?????
-?????
-?????
-?????
-?????)",
+4
+4 2 1 3
+2
+1 2
+7
+7 6 5 4 3 2 1
+
+)",
         };//</python-autofill-in>
         string testoutputs[] = {//<python-autofill-out>
+                R"(Case #1: 6
+Case #2: 1
+Case #3: 12
 
-                R"(2)",
-                R"(4)",
-                R"(40)",
+)",
         };//</python-autofill-out>
 
         cout << "--- generator testing ---" << endl;

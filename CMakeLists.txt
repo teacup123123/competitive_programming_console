@@ -3,9 +3,9 @@ project(competetions)
 
 set(CMAKE_CXX_STANDARD 14)
 
-add_executable(sol sol.cpp libs/ atcoder/ ./)
+add_executable(solution sol.cpp libs/ atcoder/ ./)
 
-target_include_directories(sol PUBLIC
+target_include_directories(solution PUBLIC
         "${PROJECT_SOURCE_DIR}"
         )
 

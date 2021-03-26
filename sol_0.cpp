@@ -344,9 +344,23 @@ inline pair<T, T> operator-(const pair<T, T> a, const pair<T, T> b) {
 void precalc() {
 }
 
-void solve(int ti) {//note ti is 1-indexed
+
+//#define INTERACTIVE 1//interactive
+
+#ifdef INTERACTIVE
+#define RTYPE bool
+#else
+#define RTYPE void
+#endif  //INTERACTIVE
+
+RTYPE solve(int ti) {
     //<python-autofill-src>
     //</python-autofill-src>
+#ifdef INTERACTIVE
+    int verdict;
+    re(verdict);
+    return verdict == -1;
+#endif  // INTERACTIVE
 }
 
 void load_cases() {
@@ -355,8 +369,12 @@ void load_cases() {
         re(T);//<test case>
     }
     vfor(i, 1, T + 1) {
-//        pr("Case #",i,": ");//Google Code jam outputs
-        solve(i);
+        pr("Case #", i, ": ");//Google Code jam outputs
+#ifdef INTERACTIVE
+        if (solve(i))break;//interactive
+#else
+        solve(i);//interactive
+#endif  // INTERACTIVE
     }
     bool finished;
     finished = true;
@@ -378,8 +396,22 @@ int main(int argc, char *argv[]) {
         string generator_inputs[] = {//<python-generator-in>
         };//</python-generator-in>
         string testinputs[] = {//<python-autofill-in>
+                R"(3
+4
+4 2 1 3
+2
+1 2
+7
+7 6 5 4 3 2 1
+
+)",
         };//</python-autofill-in>
         string testoutputs[] = {//<python-autofill-out>
+                R"(Case #1: 6
+Case #2: 1
+Case #3: 12
+
+)",
         };//</python-autofill-out>
 
         cout << "--- generator testing ---" << endl;

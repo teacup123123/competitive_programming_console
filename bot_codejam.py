@@ -30,7 +30,7 @@ class bot_codejam(bot_cp):
         samplecpp[0] = f'//{filename} {contestname}\n'
         samplecpp[1] = f'//{" ".join(self.prob_codes)}\n'
 
-        sample = driver.find_elements_by_class_name('problem-io-wrapper')
+        sample = driver.find_elements_by_class_name('sampleio-wrapper')
         if len(sample) == 0:
             print(f'\tinteractive problem {prob_code} detected!')
             ir = driver.find_element_by_partial_link_text('interactive runner')
@@ -50,17 +50,14 @@ class bot_codejam(bot_cp):
     
       attachnow(main)''')
                 f.write(content)
+            for i in range(len(samplecpp)):
+                samplecpp[i] = samplecpp[i].replace(
+                    '//#define INTERACTIVE 1//interactive',
+                    '#define INTERACTIVE 1//interactive'
+                )
             with open(filename, 'w') as f:
                 f.write(''.join(samplecpp))
         else:
-            sample = sample[0]
-            rows = sample.find_elements_by_tag_name('tr')
-            row = rows[1]
-            if row.text == 'Input\n \nOutput\n ':
-                row = rows[0]
-            caught = row.text.split('\n\n')
-            caught = caught[:2]
-
             for i in range(len(samplecpp)):
                 if '//Google Code jam outputs' in samplecpp[i]:
                     samplecpp[i] = samplecpp[i][2:]
@@ -70,10 +67,17 @@ class bot_codejam(bot_cp):
             del samplecpp[infr + 1:into]
             outfr, outto = [idx for idx, line in enumerate(samplecpp) if line.endswith('python-autofill-out>\n')]
             del samplecpp[outfr + 1:outto]
-            #
-            ins, outs = caught[0::2], caught[1::2]
-            with open(filename, 'w') as f:
 
+            sample = sample[0]
+            rows = sample.find_elements_by_tag_name('pre')
+            ins, outs = [], []
+            for r in rows:
+                id = r.get_attribute('id')
+                if 'input' in id:
+                    ins.append(r.text.strip() + '\n')
+                if 'output' in id:
+                    outs.append(r.text.strip() + '\n')
+            with open(filename, 'w') as f:
                 samplecpp.insert(outfr + 1, '\n')
                 for o in reversed(outs):
                     insertion = f'''R"({o}\n)",'''
@@ -96,7 +100,7 @@ class bot_codejam(bot_cp):
         got, prob_code, contestname, prob_codes = self.digest()
         prob_code = self.prob_code
         driver = get_driver()
-        self.submissions[prob_code]+=1
+        self.submissions[prob_code] += 1
 
         def report():
             try:
@@ -117,8 +121,8 @@ class bot_codejam(bot_cp):
                                             any(pattern in t for pattern in ['check', 'TLE', 'RE', 'CE', 'WA'])]
                                 foundat = sub_depth + 1
                                 latest = f'{foundat}-st@{tokens[0]}({"|".join(verdicts)})'
-                            if foundat == self.submissions[prob_code]:break
-                        if foundat == self.submissions[prob_code]:break
+                            if foundat == self.submissions[prob_code]: break
+                        if foundat == self.submissions[prob_code]: break
                     print(f'\r{latest}', end='')
 
                     if latest != '?' and foundat == self.submissions[prob_code]:
@@ -127,8 +131,8 @@ class bot_codejam(bot_cp):
             except Exception as e:
                 print(traceback.format_exc())
 
-        self.check_score = Thread(target=report)
-        self.check_score.start()
+        # self.check_score = Thread(target=report)
+        # self.check_score.start()
 
         if self.prob_codes[-1] != prob_code:
             try:
@@ -136,7 +140,7 @@ class bot_codejam(bot_cp):
             except Exception as e:
                 print(f'unable to autoload next, either no more next or problem_code not defined:{e}')
 
-        self.check_score.join()
+        # self.check_score.join()
 
     def prep(self, contestname):
         driver = get_driver()
