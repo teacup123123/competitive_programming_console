@@ -96,7 +96,8 @@ class bot_codejam(bot_cp):
             self.load(prob_code)
 
     def sub(self):
-        self.cp()
+        # self.cp()
+        self.incl()
         got, prob_code, contestname, prob_codes = self.digest()
         prob_code = self.prob_code
         driver = get_driver()
