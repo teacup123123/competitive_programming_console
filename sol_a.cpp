@@ -1,5 +1,5 @@
-//sol_a.cpp 000000000043580a
-//a b c d e
+//sol_a.cpp 1504
+//a b c d e f
 #include <bits/stdc++.h>
 
 using namespace std;
@@ -28,6 +28,7 @@ typedef list<int> li;
 typedef map<int, int> mii;
 
 #define mp make_pair
+#define mtp make_tuple
 #define sz(x) (int)x.size()
 #define len(x) (int)x.size()
 #define all(x) begin(x), end(x)
@@ -373,7 +374,7 @@ void load_cases() {
 #ifdef INTERACTIVE
         if (solve(i))break;
 #else
-        pr("Case #", i, ": ");//Google Code jam outputs
+//        pr("Case #", i, ": ");//Google Code jam outputs
         solve(i);
 #endif//INTERACTIVE
     }
@@ -399,22 +400,28 @@ int main(int argc, char *argv[]) {
         string generator_inputs[] = {//<python-generator-in>
         };//</python-generator-in>
         string testinputs[] = {//<python-autofill-in>
-R"(3
-4
-4 2 1 3
-2
-1 2
-7
-7 6 5 4 3 2 1
 
-)",
+R"(6
+cbabc
+ab
+zza
+ba
+a
+nutforajaroftuna)",
         };//</python-autofill-in>
         string testoutputs[] = {//<python-autofill-out>
-R"(Case #1: 6
-Case #2: 1
-Case #3: 12
 
-)",
+R"(YES
+cbabac
+YES
+aab
+YES
+zaza
+YES
+baa
+NO
+YES
+nutforajarofatuna)",
         };//</python-autofill-out>
 
         cout << "--- generator testing ---" << endl;

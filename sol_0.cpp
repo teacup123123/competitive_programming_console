@@ -28,6 +28,7 @@ typedef list<int> li;
 typedef map<int, int> mii;
 
 #define mp make_pair
+#define mtp make_tuple
 #define sz(x) (int)x.size()
 #define len(x) (int)x.size()
 #define all(x) begin(x), end(x)

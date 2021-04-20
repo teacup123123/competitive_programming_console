@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 3.17)
 project(competetions)
 
-set(CMAKE_CXX_STANDARD 14)
+set(CMAKE_CXX_STANDARD 17)
 
 add_executable(solution sol.cpp libs/ atcoder/ ./)
 

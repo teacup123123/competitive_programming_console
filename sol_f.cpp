@@ -1,4 +1,4 @@
-//sol_f.cpp abc193
+//sol_f.cpp 1504
 //a b c d e f
 #include <bits/stdc++.h>
 
@@ -28,6 +28,7 @@ typedef list<int> li;
 typedef map<int, int> mii;
 
 #define mp make_pair
+#define mtp make_tuple
 #define sz(x) (int)x.size()
 #define len(x) (int)x.size()
 #define all(x) begin(x), end(x)
@@ -48,7 +49,6 @@ typedef map<int, int> mii;
 #define trav(a, x) for (auto& a: x)
 #define def(fname, rtype, args, ...) function<rtype args> fname = [__VA_ARGS__] args
 
-#define boost() cin.tie(0),cin.sync_with_stdio(0)
 
 template<class T>
 void binstf(T &found, T a, T b, function<bool(T)> test, bool TF = true) {
@@ -344,19 +344,39 @@ inline pair<T, T> operator-(const pair<T, T> a, const pair<T, T> b) {
 void precalc() {
 }
 
-void solve(int ti) {//note ti is 1-indexed
+
+//#define INTERACTIVE 1//interactive
+
+#ifdef INTERACTIVE
+#define RTYPE bool
+#else
+#define RTYPE void
+#endif
+
+RTYPE solve(int ti) {
+    //----------------------------------------------------------------
     //<python-autofill-src>
     //</python-autofill-src>
+    //----------------------------------------------------------------
+#ifdef INTERACTIVE
+    int verdict;
+    re(verdict);
+    return verdict == -1;
+#endif
 }
 
 void load_cases() {
     int T = 1;
     {
-//        re(T);//<test case>
+        re(T);//<test case>
     }
     vfor(i, 1, T + 1) {
-//        pr("Case #",i,": ");//Google Code jam outputs
+#ifdef INTERACTIVE
+        if (solve(i))break;
+#else
+//        pr("Case #", i, ": ");//Google Code jam outputs
         solve(i);
+#endif//INTERACTIVE
     }
     bool finished;
     finished = true;
@@ -372,32 +392,34 @@ int main(int argc, char *argv[]) {
     precalc();//
 
     if (online) {
-        boost();
+#ifndef INTERACTIVE
+        cin.tie(0), cin.sync_with_stdio(0);
+#endif  // INTERACTIVE
         load_cases();
     } else {//offline
         string generator_inputs[] = {//<python-generator-in>
         };//</python-generator-in>
         string testinputs[] = {//<python-autofill-in>
 
-R"(2
-BB
-BW)",
-R"(3
-BBB
-BBB
-W?W)",
 R"(5
-?????
-?????
-?????
-?????
-?????)",
+3 10
+6 4
+1 9
+5 8
+2 7)",
+R"(2
+1 2
+3 4)",
+R"(3
+1 2
+3 6
+4 5)",
         };//</python-autofill-in>
         string testoutputs[] = {//<python-autofill-out>
 
 R"(2)",
-R"(4)",
-R"(40)",
+R"(-1)",
+R"(-1)",
         };//</python-autofill-out>
 
         cout << "--- generator testing ---" << endl;
