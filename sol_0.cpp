@@ -38,6 +38,7 @@ typedef map<int, int> mii;
 #define ft front()
 #define bk back()
 #define eb emplace_back
+#define ef emplace_front
 #define ep emplace
 #define lb lower_bound
 #define ub upper_bound
@@ -190,7 +191,7 @@ template<class T>
 T gcd(T a, T b) {
     a = a < 0 ? -a : a;
     b = b < 0 ? -b : b;
-    if (a * b == 0)
+    if (a == 0 or b == 0)
         return max(a, b);
     else return gcd(min(a, b), max(a, b) % min(a, b));
 }

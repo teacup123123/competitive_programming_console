@@ -1,5 +1,5 @@
-//sol_c.cpp 1504
-//a b c d e f
+//sol_c.cpp 1445
+//a b c d e
 #include <bits/stdc++.h>
 
 using namespace std;
@@ -38,6 +38,7 @@ typedef map<int, int> mii;
 #define ft front()
 #define bk back()
 #define eb emplace_back
+#define ef emplace_front
 #define ep emplace
 #define lb lower_bound
 #define ub upper_bound
@@ -190,7 +191,7 @@ template<class T>
 T gcd(T a, T b) {
     a = a < 0 ? -a : a;
     b = b < 0 ? -b : b;
-    if (a * b == 0)
+    if (a == 0 or b == 0)
         return max(a, b);
     else return gcd(min(a, b), max(a, b) % min(a, b));
 }
@@ -402,22 +403,15 @@ int main(int argc, char *argv[]) {
         string testinputs[] = {//<python-autofill-in>
 
 R"(3
-6
-101101
-10
-1001101101
-4
-1100)",
+10 4
+12 6
+179 822)",
         };//</python-autofill-in>
         string testoutputs[] = {//<python-autofill-out>
 
-R"(YES
-()()()
-((()))
-YES
-()()((()))
-(())()()()
-NO)",
+R"(10
+4
+179)",
         };//</python-autofill-out>
 
         cout << "--- generator testing ---" << endl;
