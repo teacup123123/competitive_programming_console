@@ -5,6 +5,20 @@
 #ifndef CODEJAM_PRIME_LADDER_H
 #define CODEJAM_PRIME_LADDER_H
 
+template<class T>
+vector <T> unique_pfacs(T in) {
+    ll n = in;
+    vector <T> ans;
+    for (ll p = 2; p * p <= n; p++) {
+        if (n % p == 0LL) {
+            while (n % p == 0LL)n /= p;
+            ans.eb(p);
+        }
+    }
+    if (n != 1)ans.emplace_back(n);
+    return ans;
+}
+
 void smallest_prime_factor_ladder(vi &into) {
     trav(e, into)e = INT_MAX;
     into[0] = 1;
