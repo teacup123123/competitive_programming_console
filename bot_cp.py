@@ -231,6 +231,18 @@ class bot_cp:
             with open(solving, 'w') as f:
                 f.writelines(got)
 
+    def swapp(self, prob_code):
+        with open(f'sol.py') as f:
+            content0 = f.read(-1)
+        with open(f'sol_{prob_code}.py') as f:
+            content1 = f.read(-1)
+        content0, content1 = content1, content0
+
+        with open(f'sol.py', 'w') as f:
+            f.write(content0)
+        with open(f'sol_{prob_code}.py', 'w') as f:
+            f.write(content1)
+
 
 def interface(c=bot_cp()):
     while True:

@@ -46,9 +46,9 @@ class bot_codejam(bot_cp):
             with open('local_testing_tool.py', 'wb') as f:
                 content = ltt.content
                 content = content.replace(b'main()\n', b'''
-      from attach_now import attachnow
-    
-      attachnow(main)''')
+      #from attach_now import attachnow
+      main()
+      #attachnow(main)''')
                 f.write(content)
             for i in range(len(samplecpp)):
                 samplecpp[i] = samplecpp[i].replace(
@@ -88,6 +88,21 @@ class bot_codejam(bot_cp):
                     insertion = f'''R"({i}\n)",'''
                     samplecpp.insert(infr + 1, insertion)
                 f.write(''.join(samplecpp))
+            with open(reference.replace('cpp', 'py'), 'r') as fin:
+                with open(filename.replace('cpp', 'py'), 'w') as fout:
+                    lines = fin.readlines()
+                    lines[0] = f'# PROBLEM {prob_code}\n'
+                    for i, l in enumerate(lines):
+                        if '#SAMPLE' in l:
+                            for samplei, sampleo in zip(ins, outs):
+                                lines.insert(i, f'''
+samples.append(("""
+{samplei}
+""", """
+{sampleo}
+"""))\n''')
+                            break
+                    fout.writelines(lines)
         # now preparing the solution
         print(f'task {prob_code} prepared')
         driver.back()

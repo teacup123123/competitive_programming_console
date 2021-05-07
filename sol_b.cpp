@@ -1,5 +1,5 @@
-//sol_b.cpp 1445
-//a b c d e
+//sol_b.cpp 00000000004362d7
+//a b c
 #include <bits/stdc++.h>
 
 using namespace std;
@@ -375,7 +375,7 @@ void load_cases() {
 #ifdef INTERACTIVE
         if (solve(i))break;
 #else
-//        pr("Case #", i, ": ");//Google Code jam outputs
+        pr("Case #", i, ": ");//Google Code jam outputs
         solve(i);
 #endif//INTERACTIVE
     }
@@ -401,15 +401,21 @@ int main(int argc, char *argv[]) {
         string generator_inputs[] = {//<python-generator-in>
         };//</python-generator-in>
         string testinputs[] = {//<python-autofill-in>
+R"(4
+2020
+2021
+68000
+101
 
-R"(2
-1 2 2 1
-4 8 9 2)",
+)",
         };//</python-autofill-in>
         string testoutputs[] = {//<python-autofill-out>
+R"(Case #1: 2021
+Case #2: 2122
+Case #3: 78910
+Case #4: 123
 
-R"(3
-12)",
+)",
         };//</python-autofill-out>
 
         cout << "--- generator testing ---" << endl;
